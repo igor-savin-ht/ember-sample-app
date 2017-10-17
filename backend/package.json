@@ -1,0 +1,77 @@
+{
+  "name": "blog-service",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "gulp combineSwagger && nodemon server.js",
+    "start-prod": "pm2 start server.js -i 0 --name \"api\"",
+    "stop-prod": "pm2 stop api",
+    "test": "gulp combineSwagger && mocha \"src/**/*spec.js\"",
+    "test-coverage": "nyc npm test",
+    "lint": "eslint . -f node_modules/eslint-html-reporter/reporter.js -o build/reports/eslint.html"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "bunyan": "^1.8.12",
+    "compression": "^1.6.2",
+    "configuration-helper": "^1.0.1",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "express-bearer-token": "^2.1.0",
+    "http-status": "^1.0.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.19.1",
+    "nconf": "^0.8.4",
+    "node-cache": "^4.1.1",
+    "oauth2-server": "^3.0.0",
+    "pg": "7.3.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.14.0",
+    "swagger-combine": "^0.12.1",
+    "swagger-routes": "^1.6.0",
+    "swagger-ui-express": "^2.0.8",
+    "validation-utils": "^2.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "del": "^3.0.0",
+    "eslint-html-reporter": "^0.5.2",
+    "eslint": "^4.9.0",
+    "gulp": "3.9.1",
+    "gulp-sequence": "0.4.6",
+    "gulp-util": "3.0.7",
+    "gulp-zip": "3.2.0",
+    "mkdirp-promise": "^5.0.1",
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1",
+    "nyc": "^11.2.1",
+    "pm2": "^2.7.1",
+    "sinon": "^4.0.1",
+    "supertest": "3.0.0",
+    "umzug": "^2.0.1"
+  },
+  "nyc": {
+    "description": "test coverage",
+    "include": [
+      "src/**",
+      "!/**/test/**"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "cache": true,
+    "all": true,
+    "report-dir": "./build/reports/coverage",
+    "check-coverage": true,
+    "lines": 90,
+    "statements": 90,
+    "functions": 90,
+    "branches": 55
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "build/swagger/*"
+    ]
+  }
+}

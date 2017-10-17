@@ -1,0 +1,6 @@
+{{#each model as |entry|}}
+    <hr>
+    {{#blog-entry subject=entry.subject}}
+        {{entry.body}}
+    {{/blog-entry}}
+{{/each}}

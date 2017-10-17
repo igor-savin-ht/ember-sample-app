@@ -1,0 +1,210 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Blog service",
+    "description": "Blog API",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "basePath": "/v1",
+  "paths": {
+    "/blog-entries": {
+      "get": {
+        "summary": "get blog entries",
+        "operationId": "getBlogEntries",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "type": "integer",
+            "default": 50
+          },
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BlogEntry"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create blog entry",
+        "operationId": "createBlogEntry",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Blog entry definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BlogEntry"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "summary": "get user",
+        "operationId": "getUser",
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "update user",
+        "operationId": "updateUser",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User patch document",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth": {
+      "post": {
+        "summary": "authenticate",
+        "operationId": "authenticate",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "grant_type",
+            "in": "formData",
+            "description": "OAuth 2 grant type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "formData",
+            "description": "authentication username",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "authentication password",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "refresh_token",
+            "in": "formData",
+            "description": "refresh token for refresh_token grant type",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AuthResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AuthResponse": {
+      "$ref": "./definitions/AuthResponse.json"
+    },
+    "BlogEntry": {
+      "$ref": "./definitions/BlogEntry.json"
+    },
+    "User": {
+      "$ref": "./definitions/User.json"
+    }
+  }
+}

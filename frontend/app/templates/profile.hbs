@@ -1,0 +1,11 @@
+<div>
+    <li>Name: {{model.name}}</li>
+    <li>Email: {{model.email}}</li>
+</div>
+
+<form {{action "modifyPassword" on="submit"}}>
+    <label for='password'>Password</label>
+    {{input value=password type='password'}}
+
+    <button type="submit">Change password</button>
+</form>

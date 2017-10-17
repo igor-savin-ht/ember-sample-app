@@ -1,0 +1,16 @@
+<nav>
+    <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav">
+            {{#nav-link-to 'blog-entries'}}Blog{{/nav-link-to}}
+            {{#nav-link-to 'blog-entry-new'}}New Blog Entry{{/nav-link-to}}
+            {{#nav-link-to 'profile'}}Profile{{/nav-link-to}}
+            {{#if isAuthenticated}}
+                <li>
+                    <a {{action (route-action "invalidateSession")}}>Logout</a>
+                </li>
+            {{else}}
+                {{#nav-link-to 'login'}}Login{{/nav-link-to}}
+            {{/if}}
+        </ul>
+    </div>
+</nav>

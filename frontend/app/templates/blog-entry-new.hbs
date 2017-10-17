@@ -1,0 +1,13 @@
+<form {{action "createBlogEntry" on="submit"}}>
+    <div>
+        <label for='subject'>Subject</label>
+        {{input value=subject}}
+    </div>
+
+    <div>
+        <label for='body'>Body</label>
+        {{textarea value=body cols = 100 rows = 6}}
+    </div>
+
+    <button type="submit">Save</button>
+</form>
