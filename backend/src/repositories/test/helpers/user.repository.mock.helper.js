@@ -6,4 +6,9 @@ function stubFindById(returnedValue) {
 		.onFirstCall().returns(Promise.resolve(returnedValue));
 }
 
-module.exports = {stubFindById};
+function stubUpdatePassword(returnedValue) {
+	return global.sinon.stub(repository, 'updatePassword')
+		.onFirstCall().returns(Promise.resolve(returnedValue));
+}
+
+module.exports = {stubFindById, stubUpdatePassword};
